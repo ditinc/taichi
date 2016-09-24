@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.5
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    maven { url "http://10.0.1.32:8080/artifactory/libs-release" }
+}
+
+dependencies {
+	compile(group: 'com.ibm.ws', name: 'runtime', version: '8.5.5.10')
+	compile(group: 'javax.servlet', name: 'servlet-api', version: '2.5')
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
