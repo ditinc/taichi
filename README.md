@@ -1,7 +1,9 @@
 # taichi
-Custom trust association interceptor for WebSphere for REMOTE_USER
+Custom trust association interceptor for WebSphere for REMOTE_USER. This allows a reverse proxy to authenticate a user independently, and just provide WebSphere with REMOTE_USER
 
-## install on a WebSphere server
+Note: this is very insecure. You need to ensure the proxy is trusted, is stripping and/or replacing REMOTE_USER from the headers provided by a user's browser, and that ALL access to WebSphere goes through the reverse proxy.
+
+## Install on a WebSphere server
 * Check the repository out to a directory
 * Run `gradlew build`
 * Copy `.\build\libs\taichi-1.0.jar` to `/opt/IBM/WebSphere/AppServer/lib/ext/`
