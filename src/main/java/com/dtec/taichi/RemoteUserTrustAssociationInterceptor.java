@@ -11,8 +11,10 @@ import com.ibm.websphere.security.WebTrustAssociationFailedException;
 import com.ibm.wsspi.security.tai.TAIResult;
 import com.ibm.wsspi.security.tai.TrustAssociationInterceptor;
 
-public class RemoteUserTrustAssociationInterceptor implements TrustAssociationInterceptor {
+public class RemoteUserTrustAssociationInterceptor implements TrustAssociationInterceptor {  
   private static final String USER_HEADER = "REMOTE_USER";
+
+  private String proxy = null;
 
   public void cleanup() {}
 
@@ -24,12 +26,17 @@ public class RemoteUserTrustAssociationInterceptor implements TrustAssociationIn
     return "1.0";
   }
 
-  public int initialize(Properties properties) throws WebTrustAssociationFailedException {
+  public int initialize(final Properties properties) throws WebTrustAssociationFailedException {
+    this.proxy = properties.getProperty("proxy");
     return 0;
   }
 
-  public boolean isTargetInterceptor(HttpServletRequest request)
+  public boolean isTargetInterceptor(final HttpServletRequest request)
       throws WebTrustAssociationException {
+    if (this.proxy != null && (!request.getRemoteAddr().equals(this.proxy)
+        && !request.getRemoteHost().equals(this.proxy))) {
+      return false;
+    }
     final Enumeration<?> requestHeaders = request.getHeaders(USER_HEADER);
     return requestHeaders.hasMoreElements();
   }
