@@ -1,7 +1,7 @@
 # taichi
 Custom trust association interceptor for WebSphere for REMOTE_USER. This allows a reverse proxy to authenticate a user independently, and just provide WebSphere with REMOTE_USER
 
-Note: this is very insecure. You need to ensure the proxy is trusted, is stripping and/or replacing REMOTE_USER from the headers provided by a user's browser, and that ALL access to WebSphere goes through the reverse proxy.
+Note: this is very insecure if installed incorrectly. You need to ensure the proxy is trusted by using the `proxy` configuration, AND the proxy is stripping and/or replacing REMOTE_USER from the headers provided by a user's browser, AND that ALL access to WebSphere goes through the reverse proxy.
 
 ## Install on a WebSphere server
 * Check the repository out to a directory
