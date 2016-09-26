@@ -34,7 +34,7 @@ Note: this is very insecure. You need to ensure the proxy is trusted, is strippi
 * Click on *Interceptors* then *New...*
 * The class name is `com.dtec.taichi.RemoteUserTrustAssociationInterceptor`
 * Click *Okay* and select to *Save* the changes
-* Restart WebSphere. Run `docker exec -it websphere /bin/bash`, enter `kill -s INT 1` then `exit`. After a few seconds `docker ps` will no longer list the container. Run `docker start websphere` to bring it back up. It will take a minute to fully start up.
+* Restart WebSphere. Run `docker exec -it kill -s INT 1`. After a few seconds `docker ps` will no longer list the container. Run `docker start websphere` to bring it back up. It will take a minute to fully start up.
 * You need to install a Chrome plugin to alter your request headers. Once you have done that, enable it to run in incognito mode and then add the header `REMOTE_USER` value `wsadmin` for `localhost` (or your Docker virtual machine IP)
 * In an incognito window (Chrome). go to `https://localhost:9443/snoop` (substitute localhost if required)
 * Verify that `wsadmin` shows up in the `User Principal`. You can also experiment with different headers and users (the user must exist in WebSphere)
